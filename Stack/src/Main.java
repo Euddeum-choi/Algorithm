@@ -11,5 +11,20 @@ public class Main {
 
         arrayStack.push('A');
         arrayStack.printStack();
+
+        arrayStack.push('B');
+        arrayStack.printStack();
+
+        arrayStack.push('C');
+        arrayStack.printStack();
+
+        arrayStack.pop();
+        arrayStack.printStack();
+
+        arrayStack.peek();
+        arrayStack.printStack();
+
+        arrayStack.clear();
+        arrayStack.printStack();
     }
 }

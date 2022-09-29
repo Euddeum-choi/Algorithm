@@ -4,23 +4,24 @@ public class ArrayStack implements Stack{
     private int stackSize;
     private char stackArr[];
 
-    ArrayStack (int num){
-        stackSize = num;
+    ArrayStack (int stackSize){
+        top = -1;
+        this.stackSize = stackSize;
         stackArr = new char[stackSize];
     }
     @Override
     public boolean isEmpty() {
-        if(stackArr[0] == 0){
-            System.out.println("스택이 비어있습니다!");
+        if(top == -1){
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
     @Override
     public boolean isFull() {
-        if(stackArr[9] != 0){
-            System.out.println("스택이 꽉 찼습니다!");
+        if(top == stackArr.length -1){
             return true;
         }
         return false;
@@ -28,53 +29,64 @@ public class ArrayStack implements Stack{
 
     @Override
     public void push(char item) {
-        for(int i = 0; i<stackArr.length; i++){
-            if(stackArr[i] ==0){
-                System.out.println("아이템을 넣었습니다.");
-                stackArr[i] = item;
-            }
+        if(!isFull()){
+            ++top;
+            stackArr[top] = item;
+            System.out.println("추가가 완료되었습니다.");
+        }
+        else {
+            System.out.println("스택이 꽉 찼습니다. 더이상 넣을 수 없습니다.");
         }
 
     }
 
     @Override
     public char pop() {
-        for(int i = stackArr.length; i==0; i--){
-            if(stackArr[i] !=0){
-                System.out.println(stackArr[i] + " 가 제거되었습니다.");
-                stackArr[i] = 0;
-            }
+        if(isEmpty()){
+            System.out.println("스택이 텅 비었습니다.");
         }
-        return 0;
+        else {
+            System.out.println(stackArr[top] + " 가 제거되었습니다.");
+            top--;
+            stackArr[top] = 0;
+        }
+        return stackArr[top];
     }
 
     @Override
     public char peek() {
-        for(int i = stackArr.length; i ==0; i--){
-            if(stackArr[i] !=0){
-                System.out.println(stackArr[i]);
-            }
+        if(isEmpty()){
+            System.out.println("스택이 텅 비었습니다. 출력할 수 없습니다.");
+        }
+        else {
+            System.out.println("최상위 값은 " + stackArr[top] + "입니다.");
         }
         return 0;
     }
 
     @Override
     public void clear() {
-        for(int i = 0; i<stackArr.length; i++){
-            stackArr[i] = 0;
+        if(isEmpty()){
+            System.out.println("스택은 이미 비워져있습니다.");
         }
+        else {
+            top = -1;
+            }
+
 
     }
     String stack;
     @Override
     public void printStack() {
-        if(stackArr[0] != 0){
-            for(int i = 0; stackArr[i] !=0; i++){
-                stack += stackArr[i] + " ";
+        if(isEmpty()){
+            System.out.println("출력할 스택이 없습니다.");
+        }
+        else {
+            System.out.print("지정된 스택의 값 : ");
+            for(int i = 0; i<=top; i++){
+                System.out.print(stackArr[i] + " ");
             }
-            System.out.println("지정된 스택의 값 : " + stack);
-        }else {
-            System.out.println("스택이 비었습니다. 출력할 수 없습니다.");
+            System.out.println();
         }
 
     }
